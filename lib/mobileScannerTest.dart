@@ -144,12 +144,32 @@ class _ScanWindowPageState extends State<ScanWindowPage> {
     return codeData;
   }
 
+  //提供第一個輸出方法
+  //Json格式輸出
   void toMap() {
     dataMap = {
       'scan_value': scannedCodeList.toList(),
       'matched_value': matchedCode.toList(),
       'error_value': errorScannedList.toList()
     };
+  }
+
+  //第二個輸出方法
+  //toList格式輸出
+  void dataToList() {
+    //{scan_value: [BRT-240216, BRT-240317, BRT-240418, BRT-240620, BRT-240519]}
+    Map<String, dynamic> scannedCodeMap = {
+      'scan_value': scannedCodeList.toList()
+    };
+    //{matched_value: [BRT-240216, BRT-240317, BRT-240418, BRT-240620, BRT-240519]}
+    Map<String, dynamic> matchedCodeMap = {
+      'matched_code': matchedCode.toList()
+    };
+    //error_value: []}
+    Map<String, dynamic> errorScannedMap = {
+      'error_scanned': errorScannedList.toList()
+    };
+    
   }
 
   //判斷是否完成掃描
