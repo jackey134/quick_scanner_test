@@ -51,6 +51,8 @@ class _ScanWindowPageState extends State<ScanWindowPage> {
   //掃描到的Code
   Set<String> scannedCodeList = <String>{};
 
+  Map<String, dynamic> dataMap = {};
+
   Timer? _resetTimer;
 
   //當掃描到的時候的情境
@@ -142,6 +144,14 @@ class _ScanWindowPageState extends State<ScanWindowPage> {
     return codeData;
   }
 
+  void toMap() {
+    dataMap = {
+      'scan_value': scannedCodeList.toList(),
+      'matched_value': matchedCode.toList(),
+      'error_value': errorScannedList.toList()
+    };
+  }
+
   //判斷是否完成掃描
   void checkScannedCodeIsOver() {
     if (matchedCode.length == codeDataList.length) {
@@ -155,9 +165,8 @@ class _ScanWindowPageState extends State<ScanWindowPage> {
             actions: <Widget>[
               TextButton(
                 onPressed: () {
-                  devLog("scannedCodeList:", scannedCodeList.toString());
-                  devLog("matchedCode:", matchedCode.toString());
-                  devLog("errorScannedList:", errorScannedList.toString());
+                  toMap();
+                  devLog('data', dataMap.toString());
                   scannedCodeListCallback();
                   Navigator.pop(context);
                   Navigator.pop(context);
